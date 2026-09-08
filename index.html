@@ -434,7 +434,7 @@ footer .wrap{display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between}
     <nav class="nav" role="tablist" aria-label="Menu utama">
       <button role="tab" aria-selected="true" data-tampil="cek">Cek Nilai</button>
       <button role="tab" aria-selected="false" data-tampil="guru">Panel Guru</button>
-      <button role="tab" aria-selected="false" data-tampil="panduan">Panduan</button>
+      <button role="tab" aria-selected="false" data-tampil="panduan" id="tab-panduan" hidden>Panduan</button>
     </nav>
   </div>
 </header>
@@ -1020,6 +1020,7 @@ document.getElementById('form-guru').addEventListener('submit', e => {
   keadaan.kelas = null;
   document.getElementById('gerbang-guru').style.display = 'none';
   document.getElementById('panel-guru').style.display = 'block';
+  document.getElementById('tab-panduan').hidden = false;
   gambarPanel();
 });
 
@@ -1032,6 +1033,9 @@ function keluar(){
   document.getElementById('gerbang-guru').style.display = 'block';
   document.getElementById('in-pengguna').value = '';
   document.getElementById('in-sandi').value = '';
+  const tabPanduan = document.getElementById('tab-panduan');
+  if (tabPanduan.getAttribute('aria-selected') === 'true') bukaTab('cek');
+  tabPanduan.hidden = true;
   document.getElementById('in-pengguna').focus();
 }
 
