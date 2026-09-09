@@ -568,17 +568,38 @@ const PENGATURAN = {
 };
 
 /* ---------- DAFTAR MATA PELAJARAN (Kurikulum Merdeka, Fase D) ---------- */
+/* kuat & lemah dibedakan per kelas (7/8/9) mengikuti jenjang materi ATP Fase D tiap tingkat */
 const MAPEL = [
-  { kode:'PAI',  nama:'Pendidikan Agama dan Budi Pekerti',  kuat:'memahami dan menerapkan nilai akhlak dalam kehidupan sehari-hari', lemah:'hafalan ayat kitab suci dan pemahaman istilah-istilah keagamaan' },
-  { kode:'PPKN', nama:'Pendidikan Pancasila',               kuat:'menjelaskan norma dan hak kewajiban warga negara',                 lemah:'analisis kasus penerapan Pancasila' },
-  { kode:'BIN',  nama:'Bahasa Indonesia',                   kuat:'menyusun teks laporan dan menyimpulkan gagasan pokok',            lemah:'penggunaan ejaan dan kalimat efektif' },
-  { kode:'MTK',  nama:'Matematika',                         kuat:'menyelesaikan persamaan linear dan mengolah data statistik',      lemah:'operasi bilangan berpangkat dan bentuk aljabar' },
-  { kode:'IPA',  nama:'Ilmu Pengetahuan Alam',              kuat:'merancang percobaan sederhana dan menarik kesimpulan',            lemah:'perhitungan pada materi gaya dan energi' },
-  { kode:'IPS',  nama:'Ilmu Pengetahuan Sosial',            kuat:'membaca peta serta menghubungkan kondisi geografis dan ekonomi',  lemah:'urutan peristiwa sejarah dan istilah kunci' },
-  { kode:'BIG',  nama:'Bahasa Inggris',                     kuat:'memahami teks pendek dan berbicara dalam percakapan sederhana',   lemah:'penggunaan tenses dan kosakata akademik' },
-  { kode:'PJOK', nama:'Pendidikan Jasmani, Olahraga, dan Kesehatan', kuat:'melakukan gerak dasar permainan bola besar',            lemah:'kebugaran jasmani dan pola hidup sehat' },
-  { kode:'INF',  nama:'Informatika',                        kuat:'mengolah data dengan lembar kerja dan berpikir komputasional',    lemah:'algoritma perulangan dan keamanan data pribadi' },
-  { kode:'SBD',  nama:'Seni,Budaya, dan Prakarya',                        kuat:'mengekspresikan gagasan lewat karya seni rupa dan musik',         lemah:'apresiasi karya dan penulisan ulasan' },
+  { kode:'PAI', nama:'Pendidikan Agama dan Budi Pekerti',
+    kuat:  { 7:'memahami dan menerapkan nilai keimanan serta akhlak mulia dalam kehidupan sehari-hari', 8:'memahami ajaran ibadah serta meneladani riwayat tokoh dan sejarah agama',        9:'memahami hukum agama, moderasi beragama, dan sejarah perkembangan agama di Indonesia' },
+    lemah: { 7:'hafalan kitab suci dan pemahaman istilah-istilah keagamaan',                            8:'praktik ibadah dan penerapan nilai sejarah dalam sikap sehari-hari',              9:'penerapan nilai toleransi dan pemahaman istilah dalam sejarah agama' } },
+  { kode:'PPKN', nama:'Pendidikan Pancasila',
+    kuat:  { 7:'menjelaskan sejarah perumusan Pancasila dan norma dalam kehidupan sehari-hari',     8:'menganalisis hak dan kewajiban warga negara serta makna Sumpah Pemuda',           9:'mengevaluasi penerapan Pancasila dalam kehidupan berbangsa dan bernegara' },
+    lemah: { 7:'hafalan butir-butir Pancasila dan penerapan norma di lingkungan sekolah',           8:'analisis kasus pelanggaran hak dan kewajiban warga negara',                       9:'analisis kasus kebangsaan dan penerapan nilai Pancasila pada isu terkini' } },
+  { kode:'BIN', nama:'Bahasa Indonesia',
+    kuat:  { 7:'menyusun teks deskripsi dan narasi serta menyimpulkan gagasan pokok teks sederhana', 8:'menyusun teks eksposisi dan ulasan serta menyampaikan pendapat secara lisan',     9:'menyusun teks laporan hasil observasi dan pidato persuasif' },
+    lemah: { 7:'penggunaan ejaan dan tanda baca dalam menulis',                                     8:'penggunaan kalimat efektif dan kata penghubung',                                  9:'penggunaan ejaan, kalimat efektif, dan struktur argumentasi' } },
+  { kode:'MTK', nama:'Matematika',
+    kuat:  { 7:'menyelesaikan operasi bilangan bulat, pecahan, dan bentuk aljabar sederhana',       8:'menyelesaikan persamaan linear serta menghitung dengan teorema Pythagoras',       9:'menyelesaikan persamaan kuadrat dan mengolah data statistik' },
+    lemah: { 7:'operasi hitung bilangan berpangkat dan bentuk aljabar',                             8:'operasi bentuk aljabar dan penerapan teorema Pythagoras',                         9:'operasi bilangan berpangkat, akar, dan penyajian data statistik' } },
+  { kode:'IPA', nama:'Ilmu Pengetahuan Alam',
+    kuat:  { 7:'mengklasifikasikan makhluk hidup dan memahami konsep zat serta perubahannya',       8:'merancang percobaan sederhana pada materi gerak, gaya, dan sistem organ tubuh',   9:'menganalisis konsep listrik, kemagnetan, dan pewarisan sifat makhluk hidup' },
+    lemah: { 7:'perhitungan sederhana pada materi suhu dan kalor',                                  8:'perhitungan pada materi gaya, usaha, dan pesawat sederhana',                      9:'perhitungan pada rangkaian listrik dan energi' } },
+  { kode:'IPS', nama:'Ilmu Pengetahuan Sosial',
+    kuat:  { 7:'membaca peta serta memahami interaksi sosial dan kondisi geografis Indonesia',      8:'menghubungkan kondisi geografis dengan aktivitas ekonomi dan mobilitas sosial',   9:'menganalisis peristiwa sejarah pergerakan nasional dan perubahan sosial akibat globalisasi' },
+    lemah: { 7:'urutan peristiwa dan istilah dalam materi kependudukan',                            8:'analisis data ekonomi dan istilah dalam materi sosial',                           9:'urutan peristiwa sejarah dan istilah kunci dalam materi kemerdekaan' } },
+  { kode:'BIG', nama:'Bahasa Inggris',
+    kuat:  { 7:'memahami teks pendek dan berbicara dalam percakapan sederhana sehari-hari',         8:'menyusun teks deskriptif dan naratif sederhana dalam bahasa Inggris',             9:'menyusun teks prosedur dan report serta berbicara dalam diskusi sederhana' },
+    lemah: { 7:'penggunaan simple present tense dan kosakata dasar',                                8:'penggunaan past tense dan kosakata terkait pengalaman',                          9:'penggunaan tenses kompleks dan kosakata akademik' } },
+  { kode:'PJOK', nama:'Pendidikan Jasmani, Olahraga, dan Kesehatan',
+    kuat:  { 7:'melakukan gerak dasar permainan bola besar dan atletik sederhana',                  8:'mempraktikkan variasi gerak permainan bola kecil dan bela diri dasar',            9:'mempraktikkan gerak spesifik permainan bola besar/kecil dan aktivitas kebugaran' },
+    lemah: { 7:'kebugaran jasmani dan teknik dasar permainan',                                      8:'koordinasi gerak dan pengaturan pola makan sehat',                                9:'kebugaran jasmani dan pemahaman pola hidup sehat' } },
+  { kode:'INF', nama:'Informatika',
+    kuat:  { 7:'mengoperasikan perangkat lunak pengolah kata dan memahami dasar berpikir komputasional', 8:'mengolah data dengan lembar kerja serta memahami algoritma percabangan',     9:'menyusun program sederhana serta memahami jaringan komputer dan internet' },
+    lemah: { 7:'penyusunan algoritma sederhana',                                                    8:'algoritma perulangan dan pengurutan data',                                        9:'algoritma perulangan dan keamanan data pribadi' } },
+  { kode:'SBD', nama:'Seni, Budaya, dan Prakarya',
+    kuat:  { 7:'mengekspresikan gagasan melalui karya seni rupa dua dimensi dan lagu daerah',       8:'menciptakan karya seni rupa tiga dimensi dan memainkan alat musik sederhana',     9:'mengekspresikan gagasan melalui karya seni rupa, musik, dan kriya secara mandiri' },
+    lemah: { 7:'apresiasi karya seni dan teknik dasar menggambar',                                  8:'apresiasi karya seni dan penulisan ulasan karya',                                 9:'apresiasi karya seni dan penulisan ulasan yang mendalam' } },
  ];
 const PETA_MAPEL = Object.fromEntries(MAPEL.map(m => [m.kode, m]));
 
@@ -652,12 +673,19 @@ function rerataSiswa(sw){
   const v = MAPEL.map(m => nilaiAkhir(sw.nilai[m.kode] || [0,0,0]));
   return v.reduce((a,b) => a+b, 0) / v.length;
 }
-function deskripsi(m, n){
+function tingkatKelas(kelas){
+  const cocok = String(kelas || '').match(/\d+/);
+  return cocok ? cocok[0] : '7';
+}
+function deskripsi(m, n, kelas){
   const p = predikat(n);
-  if (p.huruf === 'A') return `Menunjukkan penguasaan sangat baik dalam ${m.kuat}. Pertahankan konsistensi belajar.`;
-  if (p.huruf === 'B') return `Sudah baik dalam ${m.kuat}. Tingkatkan ketelitian pada ${m.lemah}.`;
-  if (p.huruf === 'C') return `Cukup menguasai ${m.kuat}. Perlu latihan tambahan pada ${m.lemah}.`;
-  return `Belum mencapai ketuntasan. Perlu pendampingan pada ${m.lemah} sebelum melanjutkan materi berikutnya.`;
+  const tk = tingkatKelas(kelas);
+  const kuat = (m.kuat && m.kuat[tk]) || m.kuat[7] || '';
+  const lemah = (m.lemah && m.lemah[tk]) || m.lemah[7] || '';
+  if (p.huruf === 'A') return `Menunjukkan penguasaan sangat baik dalam ${kuat}. Pertahankan konsistensi belajar.`;
+  if (p.huruf === 'B') return `Sudah baik dalam ${kuat}. Tingkatkan ketelitian pada ${lemah}.`;
+  if (p.huruf === 'C') return `Cukup menguasai ${kuat}. Perlu latihan tambahan pada ${lemah}.`;
+  return `Belum mencapai ketuntasan. Perlu pendampingan pada ${lemah} sebelum melanjutkan materi berikutnya.`;
 }
 function catatanWali(sw, rt, peringkat, jml){
   const nm = sw.nama.split(' ')[0];
@@ -811,7 +839,7 @@ function tampilkanRapor(sw){
     const p = predikat(na);
     return `<tr>
       <td class="no">${String(i+1).padStart(2,'0')}</td>
-      <td class="mapel">${lolos(m.nama)}<small>${lolos(deskripsi(m, na))}</small></td>
+      <td class="mapel">${lolos(m.nama)}<small>${lolos(deskripsi(m, na, sw.kelas))}</small></td>
       <td class="angka kol-rinci">${nl[0]}</td>
       <td class="angka kol-rinci">${nl[1]}</td>
       <td class="angka kol-rinci">${nl[2]}</td>
