@@ -197,6 +197,7 @@ td.akhir{font-family:var(--f-data);font-weight:600;font-size:15.5px;text-align:c
 .p-C{background:#FBF0DA;color:var(--kuning)}
 .p-D{background:#FAE3E4;color:var(--stempel)}
 .w-A{background:var(--lulus)} .w-B{background:var(--seragam-mud)} .w-C{background:var(--kuning)} .w-D{background:var(--stempel)}
+.rapor.sembunyikan-predikat .kol-pred{display:none}
 
 .blok{padding:20px 26px;border-top:1px solid var(--garis)}
 .blok h4{
@@ -565,7 +566,7 @@ const PENGATURAN = {
   SEMESTER: 'Ganjil',
   TAHUN: '2026/2027',
   KKTP: 75,                                  // kriteria ketuntasan
-  BOBOT: { formatif: 0.30, sumatif: 1, sas: 0.30 }
+  BOBOT: { formatif: 0.00, sumatif: 1.00, sas: 0.00 }
 };
 
 /* ---------- DAFTAR MATA PELAJARAN (Kurikulum Merdeka, Fase D) ---------- */
@@ -757,7 +758,8 @@ function pasangInputTanggal(awalan){
 }
 
 /* ---------- KEADAAN APLIKASI ---------- */
-const keadaan = { siswa: [], sumber: 'contoh' };
+const keadaan = { siswa: [], sumber: 'contoh', sembunyikanPredikat: false };
+try { keadaan.sembunyikanPredikat = localStorage.getItem('smpn283-sembunyikan-predikat') === '1'; } catch (e) {}
 
 async function muatData(){
   if (!PENGATURAN.URL_DATA){
@@ -845,7 +847,7 @@ function tampilkanRapor(sw){
       <td class="angka kol-rinci">${nl[1]}</td>
       <td class="angka kol-rinci">${nl[2]}</td>
       <td class="akhir">${na}</td>
-      <td><span class="lencana-nilai p-${p.huruf}">${p.huruf}</span></td>
+      <td class="kol-pred"><span class="lencana-nilai p-${p.huruf}">${p.huruf}</span></td>
       <td class="kol-grafik"><div class="bar"><i class="w-${p.huruf}" style="width:${na}%;animation-delay:${i*0.035}s"></i></div></td>
     </tr>`;
   }).join('');
@@ -873,7 +875,7 @@ function tampilkanRapor(sw){
         <span>${rt.toFixed(1)}</span>
       </div>
       <dl class="stat">
-        <div class="sel"><dt>Predikat</dt><dd>${pRt.huruf} <small>· ${pRt.kata}</small></dd></div>
+        <div class="sel kol-pred"><dt>Predikat</dt><dd>${pRt.huruf} <small>· ${pRt.kata}</small></dd></div>
         <div class="sel"><dt>Peringkat kelas</dt><dd>${pr.urutan} <small>dari ${pr.jumlah}</small></dd></div>
         <div class="sel"><dt>Mapel tuntas</dt><dd>${tuntas} <small>dari ${MAPEL.length}</small></dd></div>
         <div class="sel"><dt>Tanggal lahir</dt><dd style="font-size:14.5px">${tanggalPanjang(sw.lahir)}</dd></div>
@@ -885,7 +887,7 @@ function tampilkanRapor(sw){
         <thead><tr>
           <th></th><th>Mata pelajaran &amp; capaian kompetensi</th>
           <th class="kol-rinci" title="Bobot 30%">Formatif</th><th class="kol-rinci" title="Bobot 40%">Sumatif</th><th class="kol-rinci" title="Bobot 30%">SAS</th>
-          <th>Akhir</th><th>Pred.</th><th class="kol-grafik">Grafik</th>
+          <th>Akhir</th><th class="kol-pred">Pred.</th><th class="kol-grafik">Grafik</th>
         </tr></thead>
         <tbody>${baris}</tbody>
       </table>
@@ -920,11 +922,25 @@ function tampilkanRapor(sw){
 
   <div class="aksi">
     <button class="tombol sekunder" onclick="window.print()">Cetak atau simpan PDF</button>
+    <button class="tombol sekunder" id="tbl-toggle-pred"></button>
     <button class="tombol sekunder" id="tbl-ulang">Cek NISN lain</button>
   </div>`;
 
   document.getElementById('form-cek').style.display = 'none';
   kotak.style.display = 'block';
+
+  const raporEl = document.getElementById('lembar-rapor');
+  const tblPred = document.getElementById('tbl-toggle-pred');
+  function terapkanPredikat(){
+    raporEl.classList.toggle('sembunyikan-predikat', keadaan.sembunyikanPredikat);
+    tblPred.textContent = keadaan.sembunyikanPredikat ? 'Tampilkan predikat' : 'Sembunyikan predikat';
+  }
+  terapkanPredikat();
+  tblPred.addEventListener('click', () => {
+    keadaan.sembunyikanPredikat = !keadaan.sembunyikanPredikat;
+    try { localStorage.setItem('smpn283-sembunyikan-predikat', keadaan.sembunyikanPredikat ? '1' : '0'); } catch (e) {}
+    terapkanPredikat();
+  });
   document.getElementById('tbl-ulang').addEventListener('click', () => {
     kotak.style.display = 'none';
     kotak.innerHTML = '';
