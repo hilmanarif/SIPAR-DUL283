@@ -922,7 +922,7 @@ function tampilkanRapor(sw){
 
   <div class="aksi">
     <button class="tombol sekunder" onclick="window.print()">Cetak atau simpan PDF</button>
-    <button class="tombol sekunder" id="tbl-toggle-pred"></button>
+    ${keadaan.akun && keadaan.akun.peran === 'admin' ? '<button class="tombol sekunder" id="tbl-toggle-pred"></button>' : ''}
     <button class="tombol sekunder" id="tbl-ulang">Cek NISN lain</button>
   </div>`;
 
@@ -933,10 +933,10 @@ function tampilkanRapor(sw){
   const tblPred = document.getElementById('tbl-toggle-pred');
   function terapkanPredikat(){
     raporEl.classList.toggle('sembunyikan-predikat', keadaan.sembunyikanPredikat);
-    tblPred.textContent = keadaan.sembunyikanPredikat ? 'Tampilkan predikat' : 'Sembunyikan predikat';
+    if (tblPred) tblPred.textContent = keadaan.sembunyikanPredikat ? 'Tampilkan predikat' : 'Sembunyikan predikat';
   }
   terapkanPredikat();
-  tblPred.addEventListener('click', () => {
+  if (tblPred) tblPred.addEventListener('click', () => {
     keadaan.sembunyikanPredikat = !keadaan.sembunyikanPredikat;
     try { localStorage.setItem('smpn283-sembunyikan-predikat', keadaan.sembunyikanPredikat ? '1' : '0'); } catch (e) {}
     terapkanPredikat();
